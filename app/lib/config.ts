@@ -11,5 +11,6 @@ export const socialLinks = {
   twitter: "https://x.com/litoma",
   github: "https://github.com/litoma",
   instagram: "https://www.instagram.com/_litoma",
+  linkedin: "https://www.linkedin.com/",
   email: "mailto:mail@yusukesakai.com",
 };

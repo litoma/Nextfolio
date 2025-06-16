@@ -1,7 +1,6 @@
+import Link from "next/link";
 import { parseStringPromise } from "xml2js";
-import BlogCard from "@/components/BlogCard";
 
-// はてなブログの記事型
 interface HatenaEntry {
   id: string;
   title: string;
@@ -11,7 +10,6 @@ interface HatenaEntry {
   summary?: string;
 }
 
-// APIから記事を取得
 async function fetchHatenaBlogPosts(): Promise<HatenaEntry[]> {
   const hatenaId = process.env.HATENA_ID;
   const blogId = process.env.HATENA_BLOG_ID;
@@ -40,7 +38,6 @@ async function fetchHatenaBlogPosts(): Promise<HatenaEntry[]> {
     const parsed = await parseStringPromise(xml, { explicitArray: false });
     const entries = parsed.feed.entry || [];
 
-    // 単一エントリの場合、配列に変換
     const entryArray = Array.isArray(entries) ? entries : [entries];
 
     return entryArray.map((entry: any) => ({
@@ -71,15 +68,25 @@ export default async function BlogPage() {
             No posts found.
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap CN3">
+          <div className="grid grid-cols-1 gap-3">
             {posts.map((post) => (
-              <BlogCard
+              <Link
                 key={post.id}
-                title={post.title}
                 href={post.link}
-                description={post.summary || "No description available."}
-                date={new Date(post.published).toISOString()}
-              />
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-4 border rounded-lg hover:bg-accent transition-colors"
+              >
+                <h2 className="text-xl font-semibold text-foreground">
+                  {post.title}
+                </h2>
+                <p className="text-muted-foreground mt-1">
+                  {post.summary ? post.summary.slice(0, 100) + "..." : "No description available."}
+                </p>
+                <p className="text-sm text-gray-500 mt-2">
+                  {new Date(post.published).toLocaleDateString("ja-JP")}
+                </p>
+              </Link>
             ))}
           </div>
         )}

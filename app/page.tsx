@@ -15,11 +15,10 @@ export default function Page() {
           priority
         />
       </a>
-      <h1 className="mb-8 text-2xl font-medium">Portfolio template!</h1>
+      <h1 className="mb-8 text-2xl font-medium">Yusuke Sakai's personal web site</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          A clean, fast, and lightweight portfolio template built with Next.js,
-          Vercel, and Tailwind CSS.
+          Under construction.
         </p>
         <p>
           Nextfolio has everything you need for a portfolio: MDX blog, SEO, RSS,

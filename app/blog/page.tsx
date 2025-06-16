@@ -7,7 +7,7 @@ interface HatenaEntry {
   link: string;
   published: string;
   updated: string;
-  summary?: string;
+  draft: string;
 }
 
 async function fetchHatenaBlogPosts(): Promise<HatenaEntry[]> {
@@ -35,19 +35,24 @@ async function fetchHatenaBlogPosts(): Promise<HatenaEntry[]> {
     }
 
     const xml = await response.text();
-    const parsed = await parseStringPromise(xml, { explicitArray: false });
+    const parsed = await parseStringPromise(xml, {
+      explicitArray: false,
+      mergeAttrs: true,
+    });
     const entries = parsed.feed.entry || [];
 
     const entryArray = Array.isArray(entries) ? entries : [entries];
 
-    return entryArray.map((entry: any) => ({
-      id: entry.id,
-      title: entry.title,
-      link: entry.link.find((l: any) => l.$.rel === "alternate").$.href,
-      published: entry.published,
-      updated: entry.updated,
-      summary: entry.summary?._,
-    }));
+    return entryArray
+      .filter((entry: any) => entry["app:control"]?.["app:draft"] !== "yes")
+      .map((entry: any) => ({
+        id: entry.id,
+        title: entry.title,
+        link: entry.link.find((l: any) => l.rel === "alternate").href,
+        published: entry.published,
+        updated: entry.updated,
+        draft: entry["app:control"]?.["app:draft"] || "no",
+      }));
   } catch (error) {
     console.error("Failed to fetch Hatena blog posts:", error);
     return [];
@@ -75,15 +80,12 @@ export default async function BlogPage() {
                 href={post.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-4 border rounded-lg hover:bg-accent transition-colors"
+                className="flex flex-col p-2 rounded-sm hover:bg-accent hover:text-accent-foreground transition-colors"
               >
-                <h2 className="text-xl font-semibold text-foreground">
+                <h2 className="text-lg font-semibold text-foreground">
                   {post.title}
                 </h2>
-                <p className="text-muted-foreground mt-1">
-                  {post.summary ? post.summary.slice(0, 100) + "..." : "No description available."}
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-muted-foreground">
                   {new Date(post.published).toLocaleDateString("ja-JP")}
                 </p>
               </Link>

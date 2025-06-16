@@ -1,45 +1,89 @@
-import Link from "next/link";
-import { formatDate, getBlogPosts } from "app/lib/posts";
+import { parseStringPromise } from "xml2js";
+import BlogCard from "@/components/BlogCard";
 
-export const metadata = {
-  title: "Blog",
-  description: "Nextfolio Blog",
-};
+// はてなブログの記事型
+interface HatenaEntry {
+  id: string;
+  title: string;
+  link: string;
+  published: string;
+  updated: string;
+  summary?: string;
+}
 
-export default function BlogPosts() {
-  let allBlogs = getBlogPosts();
+// APIから記事を取得
+async function fetchHatenaBlogPosts(): Promise<HatenaEntry[]> {
+  const hatenaId = process.env.HATENA_ID;
+  const blogId = process.env.HATENA_BLOG_ID;
+  const apiKey = process.env.HATENA_API_KEY;
+
+  if (!hatenaId || !blogId || !apiKey) {
+    throw new Error("Hatena API credentials are not set.");
+  }
+
+  const url = `https://blog.hatena.ne.jp/${hatenaId}/${blogId}/atom/entry`;
+  const auth = Buffer.from(`${hatenaId}:${apiKey}`).toString("base64");
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Basic ${auth}`,
+        Accept: "application/xml",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const xml = await response.text();
+    const parsed = await parseStringPromise(xml, { explicitArray: false });
+    const entries = parsed.feed.entry || [];
+
+    // 単一エントリの場合、配列に変換
+    const entryArray = Array.isArray(entries) ? entries : [entries];
+
+    return entryArray.map((entry: any) => ({
+      id: entry.id,
+      title: entry.title,
+      link: entry.link.find((l: any) => l.$.rel === "alternate").$.href,
+      published: entry.published,
+      updated: entry.updated,
+      summary: entry.summary?._,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch Hatena blog posts:", error);
+    return [];
+  }
+}
+
+export default async function BlogPage() {
+  const posts = await fetchHatenaBlogPosts();
 
   return (
-    <section>
-      <h1 className="mb-8 text-2xl font-medium">Our Blog</h1>
-      <div>
-        {allBlogs
-          .sort((a, b) => {
-            if (
-              new Date(a.metadata.publishedAt) >
-              new Date(b.metadata.publishedAt)
-            ) {
-              return -1;
-            }
-            return 1;
-          })
-          .map((post) => (
-            <Link
-              key={post.slug}
-              className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
-              href={`/blog/${post.slug}`}
-            >
-              <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-                <h2 className="text-black dark:text-white">
-                  {post.metadata.title}
-                </h2>
-                <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                  {formatDate(post.metadata.publishedAt, false)}
-                </p>
-              </div>
-            </Link>
-          ))}
-      </div>
-    </section>
+    <main className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-10">
+      <section className="w-full max-w-2xl">
+        <h1 className="mb-8 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          Blog
+        </h1>
+        {posts.length === 0 ? (
+          <div className="text-muted-foreground">
+            No posts found.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap CN3">
+            {posts.map((post) => (
+              <BlogCard
+                key={post.id}
+                title={post.title}
+                href={post.link}
+                description={post.summary || "No description available."}
+                date={new Date(post.published).toISOString()}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { parseStringPromise } from "xml2js";
 
+// Interface for Hatena blog entry data structure
 interface HatenaEntry {
   id: string;
   title: string;
@@ -10,7 +11,7 @@ interface HatenaEntry {
   draft: string;
 }
 
-// 日付フォーマット関数（YYYY-MM-DD）
+// Formats date to YYYY-MM-DD format
 function formatDate(date: string): string {
   const d = new Date(date);
   const year = d.getFullYear();
@@ -19,21 +20,29 @@ function formatDate(date: string): string {
   return `${year}-${month}-${day}`;
 }
 
+// Fetches Hatena blog posts with pagination, filtering out draft posts
 async function fetchHatenaBlogPosts(maxPosts: number = 10): Promise<HatenaEntry[]> {
+  // Retrieve environment variables for Hatena API
   const hatenaId = process.env.HATENA_ID;
   const blogId = process.env.HATENA_BLOG_ID;
   const apiKey = process.env.HATENA_API_KEY;
 
+  // Validate environment variables
   if (!hatenaId || !blogId || !apiKey) {
     throw new Error("Hatena API credentials are not set.");
   }
 
+  // Initialize array to store published posts
   const posts: HatenaEntry[] = [];
+  // Base URL for Hatena AtomPub API
   let url = `https://blog.hatena.ne.jp/${hatenaId}/${blogId}/atom/entry`;
+  // Create Basic Auth header
   const auth = Buffer.from(`${hatenaId}:${apiKey}`).toString("base64");
 
+  // Fetch posts until maxPosts is reached or no more pages are available
   while (posts.length < maxPosts) {
     try {
+      // Make API request to fetch entries
       const response = await fetch(url, {
         headers: {
           Authorization: `Basic ${auth}`,
@@ -41,19 +50,23 @@ async function fetchHatenaBlogPosts(maxPosts: number = 10): Promise<HatenaEntry[
         },
       });
 
+      // Check for HTTP errors
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
 
+      // Parse XML response
       const xml = await response.text();
       const parsed = await parseStringPromise(xml, {
         explicitArray: false,
         mergeAttrs: true,
       });
 
+      // Extract entries from response
       const entries = parsed.feed.entry || [];
       const entryArray = Array.isArray(entries) ? entries : [entries];
 
+      // Filter published entries (exclude drafts) and map to HatenaEntry
       const publishedEntries = entryArray
         .filter((entry: any) => entry["app:control"]?.["app:draft"] !== "yes")
         .map((entry: any) => ({
@@ -65,19 +78,23 @@ async function fetchHatenaBlogPosts(maxPosts: number = 10): Promise<HatenaEntry[
           draft: entry["app:control"]?.["app:draft"] || "no",
         }));
 
+      // Add published entries to posts array
       posts.push(...publishedEntries);
 
+      // Get next page URL, if available
       const nextLink = parsed.feed.link?.find((l: any) => l.rel === "next")?.href;
       if (!nextLink || posts.length >= maxPosts) {
         break;
       }
       url = nextLink;
     } catch (error) {
+      // Log errors and stop fetching
       console.error("Failed to fetch Hatena blog posts:", error);
       break;
     }
   }
 
+  // Return up to maxPosts entries
   return posts.slice(0, maxPosts);
 }
 
@@ -85,24 +102,22 @@ export default async function BlogPage() {
   const posts = await fetchHatenaBlogPosts(10);
 
   return (
-    <section className="w-full max-w-2xl mx-auto px-4 py-10">
-      <h1 className="mb-8 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+    <section>
+      <h1 className="mb-8 text-2xl font-medium">
         Blog
       </h1>
       {posts.length === 0 ? (
-        <div className="text-muted-foreground">
+        <div>
           No posts found.
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 gap-3">
+          <div>
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={post.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col p-2 rounded-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+                className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
               >
                 <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
                   <h2 className="text-black dark:text-white">
@@ -115,11 +130,8 @@ export default async function BlogPage() {
               </Link>
             ))}
           </div>
-          <div className="mt-6 text-center">
-            <a
-              href="https://text.yusukesakai.com/"
-              className="text-blue-600 hover:underline"
-            >
+          <div>
+            <a href="https://text.yusukesakai.com/">
               More
             </a>
           </div>

@@ -10,17 +10,13 @@ interface HatenaEntry {
   draft: string;
 }
 
-// 日付フォーマット関数（元のformatDateを模倣）
-function formatDate(date: string, includeYear: boolean = true): string {
+// 日付フォーマット関数（YYYY-MM-DD）
+function formatDate(date: string): string {
   const d = new Date(date);
-  const options: Intl.DateTimeFormatOptions = {
-    month: "short",
-    day: "2-digit",
-  };
-  if (includeYear) {
-    options.year = "numeric";
-  }
-  return d.toLocaleDateString("ja-JP", options).replace(/(\d+)年/, "$1.").replace(/(\d+)月/, "$1.").replace(/(\d+)日/, "$1");
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 async function fetchHatenaBlogPosts(maxPosts: number = 10): Promise<HatenaEntry[]> {
@@ -71,7 +67,6 @@ async function fetchHatenaBlogPosts(maxPosts: number = 10): Promise<HatenaEntry[
 
       posts.push(...publishedEntries);
 
-      // 次のページのURLを取得
       const nextLink = parsed.feed.link?.find((l: any) => l.rel === "next")?.href;
       if (!nextLink || posts.length >= maxPosts) {
         break;
@@ -83,7 +78,6 @@ async function fetchHatenaBlogPosts(maxPosts: number = 10): Promise<HatenaEntry[
     }
   }
 
-  // 最大 maxPosts 件に制限
   return posts.slice(0, maxPosts);
 }
 
@@ -91,16 +85,16 @@ export default async function BlogPage() {
   const posts = await fetchHatenaBlogPosts(10);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-10">
-      <section className="w-full max-w-2xl">
-        <h1 className="mb-8 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-          Blog
-        </h1>
-        {posts.length === 0 ? (
-          <div className="text-muted-foreground">
-            No posts found.
-          </div>
-        ) : (
+    <section className="w-full max-w-2xl mx-auto px-4 py-10">
+      <h1 className="mb-8 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+        Blog
+      </h1>
+      {posts.length === 0 ? (
+        <div className="text-muted-foreground">
+          No posts found.
+        </div>
+      ) : (
+        <>
           <div className="grid grid-cols-1 gap-3">
             {posts.map((post) => (
               <Link
@@ -115,14 +109,22 @@ export default async function BlogPage() {
                     {post.title}
                   </h2>
                   <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
-                    {formatDate(post.published, false)}
+                    {formatDate(post.published)}
                   </p>
                 </div>
               </Link>
             ))}
           </div>
-        )}
-      </section>
-    </main>
+          <div className="mt-6 text-center">
+            <a
+              href="https://text.yusukesakai.com/"
+              className="text-blue-600 hover:underline"
+            >
+              More
+            </a>
+          </div>
+        </>
+      )}
+    </section>
   );
 }

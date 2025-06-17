@@ -18,10 +18,15 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium">Yusuke Sakai's personal web site</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          Under construction.
+          SNSなどのアカウント名はlitomaをよく使っています。
+          昔プレイしていたオンラインゲームのハンドル名がその由来です。
+          新しいサービスはなるべくこのアカウント名で登録していますが、出遅れて登録できなかったサービスもあります。
+          （例、Google、Instagram、Telegram、Yahoo!など）
         </p>
         <p>
-          Nextfolio has everything you need for a portfolio: MDX blog, SEO, RSS,
+          2023年から、はてなブログで私的な記事を書いています。
+          その前はWordPressを使っていました。こちらのリンクからアーカイブにアクセスできます。
+          また、たまにしずかなインターネットでポエムを書いたりもします。
           Atom & JSON feeds, analytics, Tweet & YouTube embeds, KaTeX and {""}
           <a
             target="_blank"
@@ -29,10 +34,10 @@ export default function Page() {
           >
             more
           </a>
-          .
         </p>
         <p>
-          Nextfolio is{" "}
+          このサイトはNextfolioのフォークで、Vercel上で動作しています。
+          Next.jsやGitHubについては勉強中ですが、生成AIの支援を受けてBlogページなどをカスタマイズしています。{" "}
           <a href={socialLinks.github} target="_blank">
             open-source
           </a>{" "}
@@ -48,13 +53,6 @@ export default function Page() {
           your Nextfolio site with Vercel in minutes and follow the set up
           instructions in the{" "}
           <a href="/blog/getting-started">Getting Started</a> post.
-        </p>
-        <p>
-          Built and maintained by{" "}
-          <a href="https://imsirius.xyz/" target="_blank">
-            Sirius
-          </a>
-          .
         </p>
       </div>
     </section>

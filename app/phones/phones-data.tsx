@@ -1,11 +1,11 @@
-export interface Project {
+export interface Phone {
   title: string;
   year: number;
   description: string;
   url: string;
 }
 
-export const projects: Project[] = [
+export const phones: Phone[] = [
   {
     title: "Mithril AI",
     year: 2024,

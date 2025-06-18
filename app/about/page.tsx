@@ -22,16 +22,14 @@ export default function Phones() {
         <h2 className="text-black dark:text-white">Website</h2>
         <p>
           2023年から、はてなブログで私的な記事を書いています。
-          その前はWordPressを使っていました。こちらのリンクからアーカイブにアクセスできます。
-          また、たまにしずかなインターネットでポエムを書いたりもします。
+          その前はWordPressを使っていました。<a href="https://past.yusukesakai.com">こちらのリンク</a>からアーカイブにアクセスできます。
+          また、たまに<a href="https://sizu.me/litoma">しずかなインターネット</a>でポエムを書いたりもします。
         </p>
         <p>
-          このサイトはNextfolioのフォークで、Vercel上で動作しています。
+          このサイトは<a href="https://github.com/3p5ilon/Nextfolio">Nextfolio</a>のフォークで、Vercel上で動作しています。
           Next.jsやGitHubについては勉強中ですが、生成AIの支援を受けてBlogページなどをカスタマイズしています。
         </p>
-      </div>
-      <h1 className="mb-8 text-2xl font-medium">My mobile phones history</h1>
-      <div>
+        <h2 className="text-black dark:text-white">My mobile phones history</h2>
         {phones.map((phone, index) => (
           <Link
             key={index}
@@ -43,6 +41,7 @@ export default function Phones() {
             <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
               <h2 className="text-black dark:text-white">{phone.title}</h2>
               <p className="text-neutral-600 dark:text-neutral-400">
+                {phone.year}
                 {phone.description}
               </p>
             </div>

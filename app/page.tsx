@@ -15,7 +15,7 @@ export default function Page() {
           priority
         />
       </a>
-      <h1 className="mb-8 text-2xl font-medium">Hi, I'm Yusuke Sakai</h1>
+      <h1 className="mb-8 text-2xl font-medium">Hi, I'm Yusuke Sakai.</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
           個人のウェブサイトです。

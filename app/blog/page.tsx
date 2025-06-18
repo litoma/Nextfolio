@@ -132,7 +132,7 @@ export default async function BlogPage() {
           </div>
           <div>
             <a href="https://text.yusukesakai.com/">
-              More
+              More...
             </a>
           </div>
         </>

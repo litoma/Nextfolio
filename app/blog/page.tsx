@@ -123,7 +123,7 @@ export default async function BlogPage() {
                   <h2 className="text-black dark:text-white">
                     {post.title}
                   </h2>
-                  <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm w-full max-w-2/10">
+                  <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm w-full max-w-3/10">
                     {formatDate(post.published)}
                   </p>
                 </div>

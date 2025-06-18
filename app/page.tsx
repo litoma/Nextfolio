@@ -18,7 +18,7 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium">Hi, I'm Yusuke Sakai.</h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          個人のウェブサイトです。
+          私個人のポータルサイトとして、ブログや各種SNSへのリンクをまとめています。
         </p>
       </div>
     </section>

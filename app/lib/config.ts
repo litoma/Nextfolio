@@ -3,8 +3,7 @@ export const metaData = {
   title: "yusukesakai.com",
   name: "Yusuke Sakai (litoma)",
   ogImage: "/opengraph-image.png",
-  description:
-    "kuu neru asobu.",
+  description: "kuu neru asobu.",
 };
 
 export const socialLinks = {

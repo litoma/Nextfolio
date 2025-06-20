@@ -35,11 +35,11 @@ export default function Phones() {
         </p>
         <ul>
         {phones.map((phone, index) => (
-          <li>
-            <p>
+          <li className="mb-[60px] overflow-hidden m-0 relative">
+            <p className="w-[110px] float-left mt-[20px]">
               {phone.year}
             </p>
-            <div>
+            <div className="w-3/4 float-left border-l-4 border-white pl-[30px] relative before:content-[''] before:w-[12px] before:h-[12px] before:bg-white before:absolute before:left-[106px] before:top-[24px] before:rounded-full">
             <Link
               key={index}
               href={phone.url}

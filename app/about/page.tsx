@@ -15,7 +15,7 @@ export default function Phones() {
         <h2 className="text-black dark:text-white">Myself</h2>
         <p>
           SNSなどのアカウント名は<strong>litoma</strong>をよく使っています。
-          昔プレイしていたオンラインゲームのハンドル名がその由来です。
+          由来は昔プレイしていたオンラインゲームのハンドル名です。
           新しいサービスはなるべくこのアカウント名で登録していますが、出遅れて登録できなかったサービスも多々あります
           （例：Google、Instagram、Telegram、Yahoo!など）。
         </p>
@@ -35,23 +35,22 @@ export default function Phones() {
         </p>
         <ul>
         {phones.map((phone, index) => (
-          <Link
-            key={index}
-            href={phone.url}
-            className="space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
-          >
-            <li>
+          <li>
+            <p>
+              {phone.year}
+            </p>
+            <div>
+            <Link
+              key={index}
+              href={phone.url}
+            >
+              <h3>{phone.title}</h3>
               <p>
-                {phone.year}
+                {phone.description}
               </p>
-              <div>
-                <h3>{phone.title}</h3>
-                <p>
-                  {phone.description}
-                </p>
-              </div>
-            </li>
-          </Link>
+            </Link>
+            </div>
+          </li>
         ))}
         </ul>
       </div>

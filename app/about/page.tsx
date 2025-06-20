@@ -39,7 +39,7 @@ export default function Phones() {
             <p className="float-left w-16 mt-1">
               {phone.year}
             </p>
-            <div className="float-left border-l-2 border-white pl-8 pb-4 relative before:content-[''] before:w-4 before:h-4 before:bg-white before:absolute before:left-0 before:top-0 before:rounded-full">
+            <div className="float-left border-l-2 border-white pl-8 pb-4 relative before:content-[''] before:w-2 before:h-2 before:bg-white before:absolute before:-left-2 before:top-2 before:rounded-full">
             <Link
               key={index}
               href={phone.url}

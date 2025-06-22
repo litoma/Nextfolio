@@ -36,19 +36,19 @@ export default function Phones() {
         <ul className="mt-4 mb-4">
         {phones.map((phone, index) => (
           <li className="overflow-hidden m-0 ps-0 relative">
-            <p className="float-left w-16 mt-1">
+            <p className="float-left w-1/10 mt-1">
               {phone.year}
             </p>
-            <div className="float-left border-l-2 border-white pl-8 pb-4 relative before:content-[''] before:w-2 before:h-2 before:bg-white before:absolute before:-left-2 before:top-2 before:rounded-full">
-            <Link
-              key={index}
-              href={phone.url}
-            >
-              <h3 className="mt-1 mb-1 text-black dark:text-white">{phone.title}</h3>
-              <p className="text-neutral-600 dark:text-neutral-400">
-                {phone.description}
-              </p>
-            </Link>
+            <div className="float-left w-9/10 box-border border-l-2 border-white pl-8 pb-4 relative before:content-[''] before:w-2 before:h-5 before:bg-white before:absolute before:left-0 before:top-2">
+              <Link
+                key={index}
+                href={phone.url}
+              >
+                <h3 className="mt-1 mb-1 text-black dark:text-white">{phone.title}</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">
+                  {phone.description}
+                </p>
+              </Link>
             </div>
           </li>
         ))}

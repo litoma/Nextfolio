@@ -29,11 +29,11 @@ export default function Phones() {
           このサイトは<a href="https://github.com/3p5ilon/Nextfolio">Nextfolio</a>のフォークで、Vercel上で動作しています。
           Next.jsやGitHubについては未熟ですが、生成AIの力で色々とカスタマイズしています。
         </p>
-        <h2 className="mt-8 mb-4 text-xl font-medium">Phones</h2>
+        <h2 className="mt-8 mb-4 text-xl font-medium">My phones</h2>
         <p className="mb-4">
           唐突ですが、私が使用した歴代の携帯電話を紹介します。こうして振り返ると、どうやら偶数年に買い替え意欲が高まるようです。
         </p>
-        <ul className="mb-4">
+        <ul className="mt-8 mb-4">
         {phones.map((phone, index) => (
           <li className="overflow-hidden m-0 ps-0 relative">
             <p className="float-left w-1/7 box-border mt-1 pr-4 text-right">

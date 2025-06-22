@@ -52,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="ja" className={`${inter.className}`}>
       <head>
         <link
           rel="alternate"

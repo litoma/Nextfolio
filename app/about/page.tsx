@@ -22,11 +22,11 @@ export default function Phones() {
         <h2 className="mt-8 mb-4 text-xl font-medium">Website</h2>
         <p className="mb-4">
           2023年から、<a href="https://text.yusukesakai.com/" className="underline decoration-neutral-600 dark:decoration-neutral-400">はてなブログ</a>で私的な記事を書いています。
-          その前はWordPressを使っていました（アーカイブへのリンクは<a href="https://past.yusukesakai.com">こちら</a>）。
-          また、たまに<a href="https://sizu.me/litoma">しずかなインターネット</a>でポエムを書いたりもします。
+          その前はWordPressを使っていました（アーカイブへのリンクは<a href="https://past.yusukesakai.com" className="underline decoration-neutral-600 dark:decoration-neutral-400">こちら</a>）。
+          また、たまに<a href="https://sizu.me/litoma" className="underline decoration-neutral-600 dark:decoration-neutral-400">しずかなインターネット</a>でポエムを書いたりもします。
         </p>
         <p className="mb-4">
-          このサイトは<a href="https://github.com/3p5ilon/Nextfolio">Nextfolio</a>のフォークで、Vercel上で動作しています。
+          このサイトは<a href="https://github.com/3p5ilon/Nextfolio" className="underline decoration-neutral-600 dark:decoration-neutral-400">Nextfolio</a>のフォークで、Vercel上で動作しています。
           Next.jsやGitHubについては未熟ですが、生成AIの力で色々とカスタマイズしています。
         </p>
         <h2 className="mt-8 mb-4 text-xl font-medium">My phones</h2>

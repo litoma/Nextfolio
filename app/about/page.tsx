@@ -36,10 +36,10 @@ export default function Phones() {
         <ul className="mb-4">
         {phones.map((phone, index) => (
           <li className="overflow-hidden m-0 ps-0 relative">
-            <p className="float-left w-1/7 box-border mt-1 pr-1 text-right">
+            <p className="float-left w-1/7 box-border mt-1 pr-4 text-right">
               {phone.year}
             </p>
-            <div className="float-left w-6/7 box-border border-l-2 border-white dark:border-black pl-8 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white dark:before:bg-black before:absolute before:left-0 before:top-2">
+            <div className="float-left w-6/7 box-border border-l-2 border-white dark:border-black pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
               <Link
                 key={index}
                 href={phone.url}

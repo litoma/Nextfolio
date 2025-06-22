@@ -21,7 +21,7 @@ export default function Phones() {
         </p>
         <h2 className="mt-8 mb-4 text-xl font-medium">Website</h2>
         <p className="mb-4">
-          2023年から、<a href="https://text.yusukesakai.com/">はてなブログ</a>で私的な記事を書いています。
+          2023年から、<a href="https://text.yusukesakai.com/" className="underline decoration-neutral-600 dark:decoration-neutral-400">はてなブログ</a>で私的な記事を書いています。
           その前はWordPressを使っていました（アーカイブへのリンクは<a href="https://past.yusukesakai.com">こちら</a>）。
           また、たまに<a href="https://sizu.me/litoma">しずかなインターネット</a>でポエムを書いたりもします。
         </p>
@@ -39,7 +39,7 @@ export default function Phones() {
             <p className="float-left w-1/7 box-border mt-1 pr-4 text-right">
               {phone.year}
             </p>
-            <div className="float-left w-6/7 box-border border-l-2 border-black dark:border-white pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
+            <div className="float-left w-6/7 box-border border-l-2 border-neutral-600 dark:border-neutral-400 pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-neutral-600 dark:before:bg-neutral-400 before:absolute before:left-0 before:top-2">
               <Link
                 key={index}
                 href={phone.url}

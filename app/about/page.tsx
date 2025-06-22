@@ -31,7 +31,7 @@ export default function Phones() {
         </p>
         <h2 className="mt-8 mb-4 text-xl font-medium">Phones</h2>
         <p className="mb-4">
-          唐突ですが、私が使用した歴代の携帯電話を紹介します。
+          唐突ですが、私が使用した歴代の携帯電話を紹介します。こうして振り返ると、どうやら偶数年に買い替え意欲が高まるようです。
         </p>
         <ul className="mb-4">
         {phones.map((phone, index) => (
@@ -39,7 +39,7 @@ export default function Phones() {
             <p className="float-left w-1/7 box-border mt-1 pr-4 text-right">
               {phone.year}
             </p>
-            <div className="float-left w-6/7 box-border border-l-2 border-white dark:border-black pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
+            <div className="float-left w-6/7 box-border border-l-2 border-white pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
               <Link
                 key={index}
                 href={phone.url}

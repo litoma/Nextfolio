@@ -12,34 +12,34 @@ export default function Phones() {
     <section>
       <h1 className="mb-8 text-2xl font-medium">About</h1>
       <div>
-        <h2 className="mt-4 mb-4 text-xl font-medium">Myself</h2>
-        <p>
+        <h2 className="mb-4 text-xl font-medium">Myself</h2>
+        <p className="mb-4">
           SNSなどのアカウント名は<strong>litoma</strong>をよく使っています。
           由来は昔プレイしていたオンラインゲームのハンドル名です。
           新しいサービスはなるべくこのアカウント名で登録していますが、出遅れて登録できなかったサービスも多々あります
           （例：Google、Instagram、Telegram、Yahoo!など）。
         </p>
-        <h2 className="mt-4 mb-4 text-xl font-medium">Website</h2>
-        <p>
+        <h2 className="mb-4 text-xl font-medium">Website</h2>
+        <p className="mb-4">
           2023年から、<a href="https://text.yusukesakai.com/">はてなブログ</a>で私的な記事を書いています。
           その前はWordPressを使っていました（アーカイブへのリンクは<a href="https://past.yusukesakai.com">こちら</a>）。
           また、たまに<a href="https://sizu.me/litoma">しずかなインターネット</a>でポエムを書いたりもします。
         </p>
-        <p>
+        <p className="mb-4">
           このサイトは<a href="https://github.com/3p5ilon/Nextfolio">Nextfolio</a>のフォークで、Vercel上で動作しています。
           Next.jsやGitHubについては未熟ですが、生成AIの力で色々とカスタマイズしています。
         </p>
-        <h2 className="mt-4 mb-4 text-xl font-medium">Phones</h2>
-        <p>
+        <h2 className="mb-4 text-xl font-medium">Phones</h2>
+        <p className="mb-4">
           私が使用した歴代の携帯電話を紹介します。
         </p>
-        <ul className="mt-4 mb-4">
+        <ul className="mb-4">
         {phones.map((phone, index) => (
           <li className="overflow-hidden m-0 ps-0 relative">
-            <p className="float-left w-1/10 mt-1">
+            <p className="float-left w-1/8 mt-1">
               {phone.year}
             </p>
-            <div className="float-left w-9/10 box-border border-l-2 border-white pl-8 pb-4 relative before:content-[''] before:w-2 before:h-5 before:bg-white before:absolute before:left-0 before:top-2">
+            <div className="float-left w-7/8 box-border border-l-2 border-white pl-8 pb-4 relative before:content-[''] before:w-[4px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
               <Link
                 key={index}
                 href={phone.url}

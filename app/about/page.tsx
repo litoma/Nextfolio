@@ -39,12 +39,12 @@ export default function Phones() {
             <p className="float-left w-1/7 box-border mt-1 pr-4 text-right">
               {phone.year}
             </p>
-            <div className="float-left w-6/7 box-border border-l-2 border-white pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
+            <div className="float-left w-6/7 box-border border-l-2 border-black dark:border-white pl-6 pb-4 relative before:content-[''] before:w-[8px] before:h-[2px] before:bg-white before:absolute before:left-0 before:top-2">
               <Link
                 key={index}
                 href={phone.url}
               >
-                <h3 className="mt-1 mb-1 text-black dark:text-white">{phone.title}</h3>
+                <h3 className="mt-1 mb-1">{phone.title}</h3>
                 <p className="text-neutral-600 dark:text-neutral-400">
                   {phone.description}
                 </p>

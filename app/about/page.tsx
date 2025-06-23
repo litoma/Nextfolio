@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { phones } from "./phones-data";
 
 export const metadata: Metadata = {
-  title: "My mobile phones history",
-  description: "My mobile phones history",
+  title: "About",
+  description: "About this site",
 };
 
 export default function Phones() {
@@ -27,9 +27,9 @@ export default function Phones() {
         </p>
         <p className="mb-4">
           このサイトは<a href="https://github.com/3p5ilon/Nextfolio" className="underline decoration-neutral-600 dark:decoration-neutral-400">Nextfolio</a>のフォークで、Vercel上で動作しています。
-          Next.jsやGitHubについては未熟ですが、生成AIの力で色々とカスタマイズしています。
+          開発スキルは未熟ですが、生成AIの力で色々とカスタマイズしています。
         </p>
-        <h2 className="mt-8 mb-4 text-xl font-medium">My phones</h2>
+        <h2 className="mt-8 mb-4 text-xl font-medium">My mobile phones</h2>
         <p className="mb-4">
           唐突ですが、私が使用した歴代の携帯電話を紹介します。こうして振り返ると、どうやら偶数年に買い替え意欲が高まるようです。
         </p>

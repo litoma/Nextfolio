@@ -9,7 +9,7 @@ export const phones: Phone[] = [
   {
     title: "Google Pixel 7 Pro",
     year: 2022,
-    description: "可もなく不可もなくで現在使用中",
+    description: "総じて可もなく不可もなくで現在使用中",
     url: "https://k-tai.watch.impress.co.jp/docs/column/stapa/1458586.html",
   },
   {

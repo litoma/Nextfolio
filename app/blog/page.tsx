@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { parseStringPromise } from "xml2js";
 
+// ISR (Incremental Static Regeneration) - 1時間ごとに更新
+export const revalidate = 3600;
+
 // Interface for Hatena blog entry data structure
 interface HatenaEntry {
   id: string;
